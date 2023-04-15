@@ -2,6 +2,9 @@ version: "3.8"
 
 services:
   nextcloud-aio-apache:
+    build:
+      context: ../Containers/apache/.
+      dockerfile: Dockerfile
     depends_on:
       - nextcloud-aio-onlyoffice
       - nextcloud-aio-collabora
@@ -28,6 +31,9 @@ services:
       - nextcloud-aio
 
   nextcloud-aio-database:
+    build:
+      context: ../Containers/postgresql/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-postgresql:latest
     expose:
       - "5432"
@@ -53,6 +59,9 @@ services:
       - nextcloud-aio-clamav
       - nextcloud-aio-fulltextsearch
       - nextcloud-aio-imaginary
+    build:
+      context: ../Containers/nextcloud/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-nextcloud:latest
     expose:
       - "9000"
@@ -108,6 +117,9 @@ services:
       - nextcloud-aio
 
   nextcloud-aio-redis:
+    build:
+      context: ../Containers/redis/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-redis:latest
     expose:
       - "6379"
@@ -122,6 +134,9 @@ services:
 
   nextcloud-aio-collabora:
     profiles: ["collabora"]
+    build:
+      context: ../Containers/collabora/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-collabora:latest
     expose:
       - "9980"
@@ -139,6 +154,9 @@ services:
 
   nextcloud-aio-talk:
     profiles: ["talk"]
+    build:
+      context: ../Containers/talk/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-talk:latest
     ports:
       - ${TALK_PORT}:${TALK_PORT}/tcp
@@ -157,6 +175,9 @@ services:
 
   nextcloud-aio-clamav:
     profiles: ["clamav"]
+    build:
+      context: ../Containers/clamav/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-clamav:latest
     expose:
       - "3310"
@@ -171,6 +192,9 @@ services:
 
   nextcloud-aio-onlyoffice:
     profiles: ["onlyoffice"]
+    build:
+      context: ../Containers/onlyoffice/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-onlyoffice:latest
     expose:
       - "80"
@@ -187,6 +211,9 @@ services:
 
   nextcloud-aio-imaginary:
     profiles: ["imaginary"]
+    build:
+      context: ../Containers/imaginary/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-imaginary:latest
     expose:
       - "9000"
@@ -200,6 +227,9 @@ services:
 
   nextcloud-aio-fulltextsearch:
     profiles: ["fulltextsearch"]
+    build:
+      context: ../Containers/fulltextsearch/.
+      dockerfile: Dockerfile
     image: nextcloud/aio-fulltextsearch:latest
     expose:
       - "9200"
